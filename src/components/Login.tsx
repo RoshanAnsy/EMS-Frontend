@@ -34,7 +34,8 @@ const Login = () => {
     setError('');
     
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, { email:data.email, password:data.password });
+      // console.log(object)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, { email:data.email, password:data.password });
       setCookie('login-token',response.data.token)
       setUserProfile(response.data.name,response.data.email,response.data.role);
       console.log("this is login name:",name)
