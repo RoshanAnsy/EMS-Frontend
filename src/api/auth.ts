@@ -20,3 +20,15 @@ export const GetUser= async()=>{
     
     return response.data;
 }
+
+export const GetUserList= async(token:string)=>{
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/userList`,
+    {    
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  
+  return response.data;
+}
