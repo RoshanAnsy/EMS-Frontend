@@ -1,0 +1,160 @@
+"use client";
+
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Card } from "@/components/ui/card";
+import { CreateUser } from "@/api/auth";
+import { toast } from "sonner";
+
+type LoginFormInputs = {
+  role: string;
+  name: string;
+  email: string;
+  password: string;
+  conformpassword: string;
+};
+
+const AddUser = () => {
+  const { register, handleSubmit, setValue } = useForm<LoginFormInputs>();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+
+  const handleLogin = async (data: LoginFormInputs) => {
+    console.log("Form Data:", data);
+    setLoading(true);
+
+
+    try {
+
+        const Role=data.role?.toUpperCase();
+        console.log("role",Role);
+      const response = await CreateUser(
+        data.name,
+        data.email,
+        data.password,
+        data.conformpassword,
+        Role
+      );
+        if(response.success==true)
+        toast.success("User Created Successfully");
+        router.push("/user/userList");
+
+    } catch (err) {
+      toast.error("Failed to create user");
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    // <div className="flex justify-center items-center w-full bg-neutral-50">
+      
+
+      <div className=" flex flex-col min-w-[30%] mx-auto rounded-2xl p-8">
+        {/* Logo */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className=" font-bold">Add New User</h1>
+          <Link href="/user/userList" className="text-sm text-blue-950 hover:underline"><Button variant='outline'>Summary</Button></Link>
+        </div>
+        
+
+        {/* Form */}
+        <Card className="text-black text-sm font-normal p-8 ">
+          <form onSubmit={handleSubmit(handleLogin)} className="space-y-6 ">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Name */}
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                {...register("name", { required: true })}
+                className="mt-1 w-full"
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                {...register("email", { required: true })}
+                className="mt-1 w-full"
+              />
+            </div>
+            </div>
+            {/* Role */}
+            <div>
+              <Label htmlFor="role">Role</Label>
+              <Select onValueChange={(value) => setValue("role", value)}>
+                <SelectTrigger className="w-full mt-1">
+                  <SelectValue placeholder="Select a role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="Director">Director</SelectItem>
+                  <SelectItem value="Hos">Hos</SelectItem>
+                  <SelectItem value="StateHead">State Head</SelectItem>
+                  <SelectItem value="AreaManager">Area Manager</SelectItem>
+                  <SelectItem value="SalesOfficer">Sales Officer</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            
+
+            {/* Password */}
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                {...register("password", { required: true })}
+                className="mt-1 w-full"
+              />
+            </div>
+            <div>
+              <Label htmlFor="conformpassword">Conform Password</Label>
+              <Input
+                id="conformpassword"
+                type="password"
+                {...register("conformpassword", { required: true })}
+                className="mt-1 w-full"
+              />
+            </div>
+
+            {/* Error Message */}
+            {error && <p className="text-red-500">{error}</p>}
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-900 rounded-full hover:bg-blue-950"
+            >
+              {loading ? "Adding in..." : "Add User"}
+            </Button>
+          </form>
+        </Card>
+      </div>
+    /* </div> */
+  );
+};
+
+export default AddUser;
