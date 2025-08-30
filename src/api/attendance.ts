@@ -31,11 +31,15 @@ export interface AttendanceApiResponse {
   data: AttendanceData;
   pagination: AttendancePagination;
 }
+export interface AttendancePostData {
+  PunchOutLocation?: string;
+  PunchInLocation?: string;
+}
 
 
 export const getAttendanceSummary = async (
   currentPage: number = 1,
-  pageLimit: number = 10,
+  pageLimit: number = 3,
   startDate?: string,
   endDate?: string
 ): Promise<AttendanceApiResponse> => {
@@ -53,3 +57,19 @@ export const getAttendanceSummary = async (
   return response.data;
 };
  
+
+export const PostAttendance = async (data:AttendancePostData) => {
+  const token = localStorage.getItem("token");
+  console.log("this is the data",data);
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/attendance/punch`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return response.data;
+}

@@ -6,6 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { toast } from "sonner"
 import { getAttendanceSummary } from "@/api/attendance"
 import { AttendanceApiResponse } from "@/api/attendance"
+import { PostAttendance } from "@/api/attendance"
+import { getLocation } from "@/utils/getLocation/page"
+import { DateRangePicker } from "@/utils/DateRangePicker"
 
 export default function AttendanceSystem() {
   const [attendance, setAttendance] = useState({
@@ -15,12 +18,24 @@ export default function AttendanceSystem() {
   const [isLoading, setIsLoading] = useState(false)
   const [attendanceData, setAttendanceData] = useState<AttendanceApiResponse | null>(null)
   const [isSummaryLoading, setIsSummaryLoading] = useState(false)
+  const [date, setDate] = useState<Date | undefined>(new Date())
 
   const handlePunch = async (type: "in" | "out") => {
     setIsLoading(true)
     try {
-      // 👇 baad me punch API se replace karo
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const location = await getLocation()
+      const address = location.address || `${location.lat}, ${location.lon}`
+
+      const payload = type === "in"
+        ? { PunchInLocation: address }
+        : { PunchOutLocation: address }
+
+        await PostAttendance(payload)
+
+        setAttendance({
+          isClockedIn: type === "in",
+          lastPunchTime: new Date().toISOString(),
+        })
 
       setAttendance({
         isClockedIn: type === "in",
@@ -28,7 +43,7 @@ export default function AttendanceSystem() {
       })
 
       toast.success(`Punched ${type} successfully!`, {
-        description: `Time: ${new Date().toLocaleTimeString()}`
+        description: `Time: ${new Date().toLocaleTimeString()} \n Location: ${address}`,
       })
     } catch (error) {
       toast.error("Failed to record attendance")
@@ -37,16 +52,22 @@ export default function AttendanceSystem() {
     }
   }
 
-  const fetchSummary = async () => {
+  const fetchSummary = async (page = 1, fromDate?: string, toDate?: string) => {
     setIsSummaryLoading(true)
     try {
-      const res = await getAttendanceSummary(1, 5, "2025-08-24", "2025-08-27")
+      const res = await getAttendanceSummary(page, 5, fromDate, toDate)
       setAttendanceData(res)
     } catch (err) {
       toast.error("Failed to fetch summary")
     } finally {
       setIsSummaryLoading(false)
     }
+  }
+
+  const handleSearch = (from: Date | undefined, to: Date | undefined) => {
+    const startDate = from ? from.toISOString().split("T")[0] : undefined
+    const endDate = to ? to.toISOString().split("T")[0] : undefined
+    fetchSummary(1, startDate, endDate)
   }
 
   useEffect(() => {
@@ -103,13 +124,14 @@ export default function AttendanceSystem() {
           <h2 className="text-xl font-semibold text-indigo-700 text-center md:text-left">
             Attendance Summary
           </h2>
-
+          <DateRangePicker onSearch={handleSearch} />
+          
           {isSummaryLoading && <p className="p-4 text-center">Loading...</p>}
 
           {!isSummaryLoading && attendanceData && (
             <div className="space-y-4">
               {Object.entries(attendanceData.data).map(([date, records]) => (
-                <Card key={date} className="rounded-lg shadow-sm border border-gray-200">
+                <Card key={date} className="rounded-lg shadow-sm border border-gray-200 p-5">
                   <CardHeader>
                     <CardTitle className="text-base font-semibold text-indigo-600">{date}</CardTitle>
                   </CardHeader>
