@@ -1,4 +1,5 @@
 import axios from "axios";
+import exp from "constants";
 
 // ek ek attendance record
 export interface AttendanceRecord {
@@ -36,6 +37,21 @@ export interface AttendancePostData {
   PunchInLocation?: string;
 }
 
+export interface UserAttendanceRecord {
+  PunchInTime: string;
+  PunchOutTime: string;
+  PunchInLocation: string;
+  punchOutLocation: string;
+  status: string;
+}
+export type UserAttendanceData = UserAttendanceRecord[];
+
+export interface UserAttendanceApiResponse {
+  success: boolean;
+  message: string;
+  data: UserAttendanceData;
+  pagination: AttendancePagination;
+}
 
 export const getAttendanceSummary = async (
   currentPage: number = 1,
@@ -49,6 +65,27 @@ export const getAttendanceSummary = async (
   if (endDate) url += `&endDate=${endDate}`;
 
   const response = await axios.get<AttendanceApiResponse>(url, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+//  console.log("this api res",response.data)
+  return response.data;
+};
+
+export const getUserAttendance = async (
+  currentPage: number = 1,
+  pageLimit: number = 3,
+  userId: string,
+  startDate?: string,
+  endDate?: string
+): Promise<UserAttendanceApiResponse> => {
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/attendance/user-attendance/${userId}?page=${currentPage}&limit=${pageLimit}`;
+
+  if (startDate) url += `&startDate=${startDate}`;
+  if (endDate) url += `&endDate=${endDate}`;
+
+  const response = await axios.get<UserAttendanceApiResponse>(url, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
