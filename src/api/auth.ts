@@ -32,3 +32,20 @@ export const GetUserList= async(token:string)=>{
   
   return response.data;
 }
+
+
+export const CreateUser= async(name:string,email:string,password:string,conformPassword:string,role:string)=>{
+  console.log(name,
+    email,
+    password,
+    conformPassword);
+  const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signup`,{
+    name,
+    email,
+    password,
+    conformPassword,role
+  });
+  
+  console.log(response);
+  return response.data;
+}

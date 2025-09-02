@@ -37,6 +37,7 @@ const Login = () => {
       // console.log(object)
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, { email:data.email, password:data.password });
       setCookie('login-token',response.data.token)
+      setCookie('userID',response.data.id);
       setUserProfile(response.data.name,response.data.email,response.data.role);
       console.log("this is login name:",name)
       localStorage.setItem('token', response.data.token);
