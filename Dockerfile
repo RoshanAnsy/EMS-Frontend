@@ -1,42 +1,44 @@
-# Use official Node.js image as the base image
-FROM node:18-alpine AS base
+# -------------------------------
+# Build Stage
+# -------------------------------
+FROM node:18-alpine AS builder
 
-# Set working directory
+# Install build tools for native deps (bcrypt, prisma, etc.)
+RUN apk add --no-cache python3 make g++ bash
+
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
+# Copy package files
 COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
 
-# Install dependencies
+# Install all deps (including dev for building)
 RUN npm install
 
-# Copy the rest of the application
+# Copy app source
 COPY . .
 
-# Build the Next.js app
+# Build Next.js app
 RUN npm run build
 
-# -----------------------------------
-# Production image
-# -----------------------------------
+# -------------------------------
+# Production Stage
+# -------------------------------
 FROM node:18-alpine AS production
 
-# Set working directory
 WORKDIR /app
 
-# Copy only necessary files from the builder
-COPY --from=base /app/package.json ./
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/.next ./.next
-COPY --from=base /app/public ./public
-COPY --from=base /app/next.config.ts ./
-COPY --from=base /app/tsconfig.json ./
+# Copy only required files
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.ts ./next.config.ts
 
-# Set environment variable
+# Set environment
 ENV NODE_ENV=production
 
-# Expose port (default Next.js port)
-EXPOSE 3002
+# Expose Next.js default port
+EXPOSE 3000
 
-# Start the Next.js server
+# Run production server
 CMD ["npm", "start"]

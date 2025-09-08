@@ -1,11 +1,12 @@
+import React from 'react';
+// import UploadBill from '@/components/common/uploadBill';
+// import Login from '@/components/Login';
 
-"use client"
-import React from 'react'
-import UploadBill from '@/components/common/uploadBill';
-const page = () => {
-  return 
-    return (<UploadBill/>)
-  
-}
+const Page = () => {
+  return (
+    // <Login />
+    <></>
+  );
+};
 
-export default page
+export default Page;

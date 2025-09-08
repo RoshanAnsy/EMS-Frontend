@@ -1,8 +1,9 @@
 "use client";
 
+
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import { useRouter } from "next/navigation";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -38,12 +39,12 @@ type User = {
 };
 
 const AccessRights = () => {
-  const { register, handleSubmit, setValue, control, watch } =
+  const {  handleSubmit, setValue, control, watch } =
     useForm<LoginFormInputs>({
       defaultValues: { id: "", Menu: [] },
     });
 
-  const router = useRouter();
+ 
   const [users, setUsers] = useState<User[]>([]);
   const [sideBarData, setSideBarData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -110,7 +111,7 @@ const AccessRights = () => {
 
       // Transform payload → only selected submenus
       const transformed = data.Menu.map((menu) => {
-        const menuDetails = sideBarData.find((m) => m.id === menu.MenuId);
+        // const menuDetails = sideBarData.find((m) => m.id === menu.MenuId);
         const selectedSubs = menu.subMenu
           .filter((s) => s.canView)
           .map((s) => ({
@@ -141,6 +142,7 @@ const AccessRights = () => {
       }
     } catch (err) {
       toast.error("Error updating access rights");
+      console.log(err)
     } finally {
       setLoading(false);
     }
@@ -150,7 +152,7 @@ const AccessRights = () => {
     <div className="flex flex-col min-w-[30%] mx-auto rounded-2xl p-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="font-bold">Provide access</h1>
-        <Link href="/user/userList">
+        <Link href="/view/user/userList">
           <Button variant="outline">Back</Button>
         </Link>
       </div>

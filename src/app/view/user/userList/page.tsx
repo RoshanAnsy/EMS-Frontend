@@ -1,5 +1,5 @@
 import { GetUserList } from "@/api/auth"
-import { getCookie, getCookies, hasCookie } from 'cookies-next/server';
+import { getCookie} from 'cookies-next/server';
 import { cookies } from 'next/headers';
 // import Link from "next/link";
 import {
@@ -29,16 +29,16 @@ const Page = async () => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-xl font-semibold mb-4">User List</h1>
-       <Link href="/user/createUser" className="text-sm text-blue-950 hover:underline"><Button variant='outline'>Back</Button></Link>
+       <Link href="/view/user/createUser" className="text-sm text-blue-950 hover:underline"><Button variant='outline'>Back</Button></Link>
       </div>
       
       <Table className="border-r-blue-50">
         <TableHeader className="bg-gray-100">
           <TableRow>
-            <TableHead className="w-[200px]">Name</TableHead>
-            <TableHead className="w-[150px]">Role</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Action</TableHead>
+            <TableHead className="w-[200px] border-2 border-gray-300 text-start">Name</TableHead>
+            <TableHead className="w-[150px] border-2 border-gray-300 text-start">Role</TableHead>
+            <TableHead className="border-2 border-gray-300 text-start">Email</TableHead>
+            <TableHead className="border-2 border-gray-300 text-start">Action</TableHead>
             
           </TableRow>
         </TableHeader>
@@ -46,11 +46,11 @@ const Page = async () => {
           {users.length > 0 ? (
             users.map((user, index) => (
               <TableRow key={index}>
-                <TableCell className="font-medium">{user.name}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                 <TableCell className="space-x-4">
-                  <Link href='/user/role'><Button variant="link" className="p-0"> Access</Button></Link>
+                <TableCell className="font-medium border-2 border-gray-100 text-start">{user.name}</TableCell>
+                <TableCell className="border-2 border-gray-100 text-start">{user.role}</TableCell>
+                <TableCell className="border-2 border-gray-100 text-start">{user.email}</TableCell>
+                 <TableCell className="space-x-4 border-2 border-gray-100 text-start">
+                  <Link href='/view/user/role'><Button variant="link" className="p-0"> Access</Button></Link>
                   <Link href=''><Button variant="link" className="p-0 text-red-600">Delete</Button></Link>
                  </TableCell>
                 

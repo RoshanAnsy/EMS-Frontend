@@ -44,13 +44,15 @@ export const UpdateAccessRights = async (data:LoginFormInputs[]) => {
 
 
 export const GetSideMenu = async (token:string) => {
+  console.log("token on function level",token)
   const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/GetMenuWithSubMenu`,
+    `${process.env.NEXT_PUBLIC_API_URL}/getMenuWithSubMenu`,
     {
       headers: {
         authorization: `Bearer ${token}`,
       },
     },
   );
+  console.log("data from api",response)
   return response.data;
 };

@@ -15,10 +15,11 @@ import { useRouter } from 'next/navigation';
 import { useSetCookie } from 'cookies-next';
 import { useForm } from "react-hook-form";
 import userProfileStore from '@/store/user.store';
+import { Card } from './ui/card';
 
 
 type LoginFormInputs = {
-  email: string;
+  EmplyID: string;
   password: string;
 };
 const Login = () => {
@@ -29,19 +30,19 @@ const Login = () => {
   const [error, setError] = useState('');
   const {setUserProfile,name} = userProfileStore();
 
-  const handleLogin = async (data:{email:string,password:string}) => {
+  const handleLogin = async (data:{EmplyID:string,password:string}) => {
     setLoading(true);
     setError('');
     
     try {
       // console.log(object)
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, { email:data.email, password:data.password });
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, { EmplyID:data.EmplyID, password:data.password });
       setCookie('login-token',response.data.token)
       setCookie('userID',response.data.id);
       setUserProfile(response.data.name,response.data.email,response.data.role);
       console.log("this is login name:",name)
       localStorage.setItem('token', response.data.token);
-      router.push(`/view`)
+      router.push(`/view/attendance`)
     } catch (err) {
       setError(`Login failed. Please check your credentials and try again. ${err}`,);
       router.push('/login')
@@ -51,23 +52,19 @@ const Login = () => {
   };
 
   return (
-   <div className='flex justify-center items-center w-full border-r-8 bg-neutral-50 '>
+   <div className='flex justify-center items-center w-full border-r-8  '>
     <div className="flex items-center w-[60%] h-screen  " > 
       <Image src={biller} alt="Picture of the author" className=' h-full rounded-l-2xl' />
     </div>
-    <div className="flex flex-col min-w-[30%]  mx-auto rounded-2xl  gap-14 p-8 ">
-      <div className='flex justify-center gap-x-4 items-center'>
-        <Image src={BillerLogo} alt="Picture of the author" />
-      </div>
-     <div className='flex justify-center gap-x-4 items-center' >
-       {/* <Image src={vender}  alt="Picture of the author"/>  */}
-       </div>
+    <Card className="flex flex-col min-w-[30%]  mx-auto p-8 ">
+      
+     <p className='font-bold text-xl text-center'>URV FORTUNE PVT.LTD</p>
       <div className=' text-black text-sm font-normal p-12 justify-center'>
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="mb-4">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="EmplyID">Enter your ID</Label>
           <Input
-          {...register("email", { required: true })}
+          {...register("EmplyID", { required: true })}
             className="mt-1  w-full"
           />
         </div>
@@ -86,7 +83,7 @@ const Login = () => {
         {/* <Link className='w-full mb-4 text-blue-900 font-bold' href={``}>Forgot your password</Link> */}
       </form>
       </div>
-    </div>
+    </Card>
    </div>
   );
 };

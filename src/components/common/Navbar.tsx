@@ -1,9 +1,11 @@
+
 'use client';
 
+
 import React, { useCallback, useEffect } from 'react';
-import { House, Logs } from 'lucide-react';
+// import { House, Logs } from 'lucide-react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 import icon from '../../../public/icon.png';
 import { Button } from '../ui/button';
 import {  getCookie } from 'cookies-next/client';
@@ -12,19 +14,20 @@ import Link from 'next/link';
 import { GetUser } from '@/api/auth';
 import { Inter } from 'next/font/google'
 import NotificationsTrigger from '../notification/notifications.trigger';
-import UserProfile from '../user/user.profile';
+// import UserProfile from '../user/UserProfile';
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Navbar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { name, setUserProfile } = userProfileStore();
-  const pathname = usePathname();
+  // const pathname = usePathname();
   
   // Fetch user data and update profile
   const fetchUserData = useCallback(async () => {
     try {
-      const {data} = await GetUser();
+      const token=getCookie('login-token')
+      const {data} = await GetUser(token as string);
       console.log("after reload ",data)
       if(data!=null){
         setUserProfile(data.name, data.email,data.role);
@@ -49,6 +52,7 @@ const Navbar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <div className='flex items-center gap-4'>
           <Image src={icon} alt='logo' className='h-8 w-auto' />
           <p className='text-black  text-2xl'>Biller</p>
+          <div className='w-full'>{children}</div>
         </div>
 
         {/* Navigation Section */}
@@ -56,7 +60,7 @@ const Navbar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
           <ul className='flex items-center gap-6'>
             {name ? (<div className=' flex gap-x-6'>
               <NotificationsTrigger/>
-              <UserProfile/>
+              {/* <UserProfile/> */}
               </div>
             ) : (
               <Link href={'/login'}>
@@ -73,7 +77,7 @@ const Navbar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       </div>
       {/* Search Section */}
       <div className='flex w-full min-h-[92vh] text-text-color'>
-        <div className='bg-neutral-50 w-20 min-h-[90vh] flex flex-col gap-y-8 px-2 pt-12'>
+        {/* <div className='bg-neutral-50 w-20 min-h-[90vh] flex flex-col gap-y-8 px-2 pt-12'>
           <Link href={'/view'}>
             <p className={`flex flex-col items-center text-center cursor-pointer `}>
               <House className={` cursor-pointer ${pathname === '/view' ? 'text-blue-500 bg-highLight' : ''}` }/>
@@ -86,8 +90,8 @@ const Navbar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
               <span>Summary</span>
             </p>
           </Link>
-        </div>
-        <div className='w-full'>{children}</div>
+        </div> */}
+        
       </div>
     </div>
   );

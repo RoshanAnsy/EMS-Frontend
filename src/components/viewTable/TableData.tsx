@@ -107,7 +107,7 @@ const TableData = () => {
     } catch (e) {
       console.error("Error fetching data:", e);
     }
-  },[]);
+  },[page?.currentPage]);
   
   const FuncNextPage= async ()=>{
     try {

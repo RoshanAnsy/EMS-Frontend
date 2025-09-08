@@ -24,13 +24,14 @@ type LoginFormInputs = {
   email: string;
   password: string;
   conformpassword: string;
+  EmplyID:string;
 };
 
 const AddUser = () => {
   const { register, handleSubmit, setValue } = useForm<LoginFormInputs>();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error] = useState("");
 
 
   const handleLogin = async (data: LoginFormInputs) => {
@@ -42,19 +43,20 @@ const AddUser = () => {
 
         const Role=data.role?.toUpperCase();
         console.log("role",Role);
-      const response = await CreateUser(
+        const response = await CreateUser(
         data.name,
         data.email,
         data.password,
         data.conformpassword,
-        Role
+        Role,data.EmplyID
       );
         if(response.success==true)
         toast.success("User Created Successfully");
-        router.push("/user/userList");
+        router.push("/view/user/userList");
 
     } catch (err) {
       toast.error("Failed to create user");
+      console.log(err)
 
     } finally {
       setLoading(false);
@@ -69,7 +71,7 @@ const AddUser = () => {
         {/* Logo */}
         <div className="flex justify-between items-center mb-6">
           <h1 className=" font-bold">Add New User</h1>
-          <Link href="/user/userList" className="text-sm text-blue-950 hover:underline"><Button variant='outline'>Summary</Button></Link>
+          <Link href="/view/user/userList" className="text-sm text-blue-950 hover:underline"><Button variant='outline'>Summary</Button></Link>
         </div>
         
 
@@ -99,6 +101,17 @@ const AddUser = () => {
               />
             </div>
             </div>
+            <div>
+              <div>
+              <Label htmlFor="EmplyID">EmplyID</Label>
+              <Input
+                id="EmplyID"
+                type="string"
+                {...register("EmplyID", { required: true })}
+                className="mt-1 w-full"
+              />
+            </div>
+            </div>
             {/* Role */}
             <div>
               <Label htmlFor="role">Role</Label>
@@ -116,7 +129,7 @@ const AddUser = () => {
                 </SelectContent>
               </Select>
             </div>
-
+      
             
 
             {/* Password */}

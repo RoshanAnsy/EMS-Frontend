@@ -26,11 +26,12 @@ export interface User {
 export const getAllUser = async (
     currentPage: number = 1,
     pageLimit: number = 1,
+    token:string
 ):Promise<User> => {
-    let url = `${process.env.NEXT_PUBLIC_API_URL}/getAllUsers?page=${currentPage}&limit=${pageLimit}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/getAllUsers?page=${currentPage}&limit=${pageLimit}`;
     const response = await axios.get(url, {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 

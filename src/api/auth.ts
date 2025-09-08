@@ -9,11 +9,12 @@ export const checkAuth = async () => {
     return response.data;
   };
 
-export const GetUser= async()=>{
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`,
+export const GetUser= async(token:string)=>{
+  console.log(token,"from test2")
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/getUser`,
       {    
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -34,7 +35,7 @@ export const GetUserList= async(token:string)=>{
 }
 
 
-export const CreateUser= async(name:string,email:string,password:string,conformPassword:string,role:string)=>{
+export const CreateUser= async(name:string,email:string,password:string,conformPassword:string,role:string,EmplyID:string)=>{
   console.log(name,
     email,
     password,
@@ -43,7 +44,7 @@ export const CreateUser= async(name:string,email:string,password:string,conformP
     name,
     email,
     password,
-    conformPassword,role
+    conformPassword,role,EmplyID
   });
   
   console.log(response);
