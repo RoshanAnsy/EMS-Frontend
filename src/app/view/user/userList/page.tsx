@@ -12,18 +12,23 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-
+// import { DeleteUser } from "@/api/auth";
+// import { toast } from "sonner";
+import DeleteUserComponent from "@/components/user/DeleteUserComponent";
 type User = {
   name: string
   role: string
   email: string
+  id: string
 
 }
 
 const Page = async () => {
  const token = await getCookie('login-token', { cookies });
   const response = await GetUserList(token as string)
-  const users: User[] = response?.users || [] // Adjust depending on API response shape
+  const users: User[] = response?.users || []
+  
+  // Adjust depending on API response shape
 
   return (
     <div className="p-6">
@@ -50,8 +55,16 @@ const Page = async () => {
                 <TableCell className="border-2 border-gray-100 text-start">{user.role}</TableCell>
                 <TableCell className="border-2 border-gray-100 text-start">{user.email}</TableCell>
                  <TableCell className="space-x-4 border-2 border-gray-100 text-start">
-                  <Link href='/view/user/role'><Button variant="link" className="p-0"> Access</Button></Link>
-                  <Link href=''><Button variant="link" className="p-0 text-red-600">Delete</Button></Link>
+                  <Link href={'/view/user/role'}><Button variant="link" className="p-0"> Access</Button></Link>
+                  <Link href={`/view/user/remove/${user.id}`}><Button variant="link" className="p-0"> Remove Access</Button></Link>
+                  <Link href={`/view/user/details/${user.id}`}><Button variant="link" className="p-0"> View</Button></Link>
+                  <Link href={`/view/user/update/${user.id}`}><Button variant="link" className="p-0"> Update</Button></Link>
+                  <Link href={`/view/pay/${user.id}`}><Button variant="link" className="p-0"> Pay</Button></Link>
+                  <Link href={`/view/user/usermap/summary/${user.id}`}><Button variant="link" className="p-0"> Team</Button></Link>
+                  <Link href=''>
+                 
+                  <DeleteUserComponent id={user.id}/>
+                  </Link>
                  </TableCell>
                 
               </TableRow>

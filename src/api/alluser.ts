@@ -37,3 +37,111 @@ export const getAllUser = async (
 
     return response.data;
 }
+
+export const GetListUserOnRoleBased = async (
+    
+    role:string,
+    token:string)=> {
+
+        console.log(role)
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/GetListUserOnRoleBased`;
+    const response = await axios.post(url,
+        {Role:role.toUpperCase()},
+         {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+}
+
+
+export const GetListOfUserOnHierarchyWise  = async (
+    
+    role:string,
+    token:string)=> {
+
+        console.log(role)
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/UserListByRole?Role=${role.toUpperCase()}`;
+    const response = await axios.get(url,
+       
+         {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+}
+
+export const CreateUserMaping = async (
+    
+    assignedToId:string,
+    assignUserIds:string[],
+    token:string)=> {
+
+        // console.log(role)
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/CreateUserMaping`;
+    const response = await axios.post(url,
+        
+        {  assignedToId, assignUserIds } ,
+         {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+}
+
+export const GetListUserAssign  = async (
+   
+    token:string)=> {
+
+        // console.log(role)
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/GetListUserAssign`;
+    const response = await axios.get(url,
+       
+         {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+}
+
+// export const GetTeamListAssign  = async (
+//    id:string,startingdate:Date,endDate:Date,
+//     token:string)=> {
+
+//         // console.log(role)
+//     const url = `${process.env.NEXT_PUBLIC_API_URL}/GetTeamListByID?UserID=${id}`;
+//     const response = await axios.get(url,
+       
+//          {
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//         },
+//     });
+
+//     return response.data;
+// }
+
+export const GetTeamListAssign  = async (
+   id:string,startingdate:Date,endDate:Date,
+    token:string)=> {
+
+        console.log(startingdate,endDate)
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/GetTeamListAndTaskDetailByID?UserID=${id}&startOfMonth=${startingdate}&endOfMonth=${endDate}`;
+    const response = await axios.get(url,
+       
+         {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+}

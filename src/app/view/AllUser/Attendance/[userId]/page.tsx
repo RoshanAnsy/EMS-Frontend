@@ -1,6 +1,6 @@
 import React from "react"
 import { Button } from "@/components/ui/button"
-import GetLocalTime from "@/utils/getLocation/GetLocalTime"
+import {GetLocalTime} from "@/utils/getLocation/GetLocalTime"
 import {
   Table,
   TableBody,
@@ -13,6 +13,7 @@ import { getCookie } from "cookies-next/server"
 import { cookies } from "next/headers"
 import { getUserAttendance, UserAttendanceRecord } from "@/api/attendance"
 import Link from "next/link"
+import ExportToExcelAttendances from "@/components/attendances/ExportToExcelAttendances"
 interface PageProps{
   params:Promise<{ userId: string }>;
 }
@@ -36,9 +37,13 @@ export default async function Page({params}: PageProps) {
     <div className="p-6 max-w-5xl">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Attendance Summary</h1>
-        <Link href="/view/AllUser">
-          <Button variant="outline">Back to Users</Button>
+        <div className="flex space-x-2">
+          <Link href="/view/AllUser">
+          <Button variant="outline">Back</Button>
         </Link>
+        <ExportToExcelAttendances records={records} />
+        </div>
+        
       </div>
 
       <div className="overflow-x-auto">

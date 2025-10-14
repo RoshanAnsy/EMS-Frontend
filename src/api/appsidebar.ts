@@ -56,3 +56,19 @@ export const GetSideMenu = async (token:string) => {
   console.log("data from api",response)
   return response.data;
 };
+
+
+export const RemoveSubMenu = async (token:string,menuIds:string[],submenuIds:string[],userId:string) => {
+  console.log("token on function level",token)
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/RemoveAccess`,
+    {menuIds,submenuIds,userId},
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  console.log("data from api",response)
+  return response.data;
+};

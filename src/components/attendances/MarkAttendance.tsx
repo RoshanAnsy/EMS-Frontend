@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { toast } from "sonner";
 import { getCookie } from "cookies-next/client";
 import { GetCurrentLocation } from "@/utils/getLocation/page";
-import GetLocalTime from "@/utils/getLocation/GetLocalTime";
+import {GetLocalTime} from "@/utils/getLocation/GetLocalTime";
 import {
   MarkAttendanceApi,
   MarkAttendanceApiPunchOut,

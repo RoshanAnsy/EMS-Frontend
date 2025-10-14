@@ -17,7 +17,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { CreateUser } from "@/api/auth";
 import { toast } from "sonner";
-
+import { getCookie } from "cookies-next/client";
 type LoginFormInputs = {
   role: string;
   name: string;
@@ -25,10 +25,12 @@ type LoginFormInputs = {
   password: string;
   conformpassword: string;
   EmplyID:string;
+  DateOfJoining:Date;
 };
 
 const AddUser = () => {
   const { register, handleSubmit, setValue } = useForm<LoginFormInputs>();
+  const token = getCookie("login-token");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error] = useState("");
@@ -48,7 +50,7 @@ const AddUser = () => {
         data.email,
         data.password,
         data.conformpassword,
-        Role,data.EmplyID
+        Role,data.EmplyID,data.DateOfJoining,token as string
       );
         if(response.success==true)
         toast.success("User Created Successfully");
@@ -112,6 +114,17 @@ const AddUser = () => {
               />
             </div>
             </div>
+            <div>
+              <div>
+              <Label htmlFor="DateOfJoining">Date Of Joining</Label>
+              <Input
+                id="DateOfJoining"
+                type="Date"
+                {...register("DateOfJoining", { required: true })}
+                className="mt-1 w-full"
+              />
+            </div>
+            </div>
             {/* Role */}
             <div>
               <Label htmlFor="role">Role</Label>
@@ -126,6 +139,15 @@ const AddUser = () => {
                   <SelectItem value="StateHead">State Head</SelectItem>
                   <SelectItem value="AreaManager">Area Manager</SelectItem>
                   <SelectItem value="SalesOfficer">Sales Officer</SelectItem>
+                  <SelectItem value="AREAMANAGEROPS">Area Manager Ops</SelectItem>
+                  <SelectItem value="ACCOUNTANT">Accountant</SelectItem>
+                  <SelectItem value="SITESUPERVISOR">Site supervisor</SelectItem>
+                  <SelectItem value="HR">HR</SelectItem>
+                  <SelectItem value="CP1">CP-1</SelectItem>
+                  <SelectItem value="CP2">CP-2</SelectItem>
+                  <SelectItem value="SCP1">SCP-1</SelectItem>
+                  <SelectItem value="SCP2">SCP-2</SelectItem>
+
                 </SelectContent>
               </Select>
             </div>

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect } from 'react'
 import { GetPaymentDetails } from '@/api/Bill';
 import { Eye,Loader2, FileText } from 'lucide-react';
