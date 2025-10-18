@@ -137,11 +137,13 @@ const AddUser = () => {
                   <SelectItem value="Director">Director</SelectItem>
                   <SelectItem value="Hos">Hos</SelectItem>
                   <SelectItem value="StateHead">State Head</SelectItem>
-                  <SelectItem value="AreaManager">Area Manager</SelectItem>
+                  <SelectItem value="AREAMANAGER1">Area Manager 1</SelectItem>
+                  <SelectItem value="AREAMANAGER2">Area Manager 2</SelectItem>
                   <SelectItem value="SalesOfficer">Sales Officer</SelectItem>
                   <SelectItem value="AREAMANAGEROPS">Area Manager Ops</SelectItem>
                   <SelectItem value="ACCOUNTANT">Accountant</SelectItem>
                   <SelectItem value="SITESUPERVISOR">Site supervisor</SelectItem>
+                  <SelectItem value="TRAINEE">Trainee</SelectItem>
                   <SelectItem value="HR">HR</SelectItem>
                   <SelectItem value="CP1">CP-1</SelectItem>
                   <SelectItem value="CP2">CP-2</SelectItem>

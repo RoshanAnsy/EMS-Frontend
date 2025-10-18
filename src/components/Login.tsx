@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Image from 'next/image';
-import URV from '../../public/URV.png';
+import URV from '../../public/URV-HRMS4a.png';
 // import Biller from '../../public/Biller.png';
 import BillerLogo from '../../public/Biller-Logo.png';
 // import icon from '../../public/icon.png'
@@ -53,11 +53,11 @@ const Login = () => {
   };
 
   return (
-   <div className='flex justify-center items-center w-full border-r-8  '>
-    <div className=" items-center  h-screen hidden md:flex flex-1 " > 
-      <Image src={URV} alt="Picture of the author" className=' h-full rounded-l-2xl' />
+   <div className='flex  items-center w-full   '>
+    <div className=" items-center  h-screen hidden md:flex flex-1 w-full" > 
+      <Image src={URV} alt="Picture of the author" className=' h-full w-full rounded-l-2xl' />
     </div>
-    <Card className="flex flex-col min-w-[30%] sm:mx-12 my-24 p-6 rounded-lg shadow-md">
+    <Card className="flex flex-col min-w-[30%]  sm:mx-12 my-12 p-6 rounded-lg shadow-md">
       
      <p className='font-bold text-xl text-center'>URV FORTUNE PVT.LTD</p>
       <div className=' text-black text-sm font-normal p-12 justify-center'>
