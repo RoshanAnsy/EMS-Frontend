@@ -131,7 +131,8 @@ const UserMap = () => {
                 <SelectItem value="Director">Director</SelectItem>
                 <SelectItem value="Hos">Hos</SelectItem>
                 <SelectItem value="StateHead">State Head</SelectItem>
-                <SelectItem value="AreaManager">Area Manager</SelectItem>
+                <SelectItem value="AREAMANAGER1">Area Manager 1</SelectItem>
+                <SelectItem value="AREAMANAGER2">Area Manager 2</SelectItem>
                 <SelectItem value="SalesOfficer">Sales Officer</SelectItem>
                 <SelectItem value="AREAMANAGEROPS">Area Manager Ops</SelectItem>
                 <SelectItem value="ACCOUNTANT">Accountant</SelectItem>
@@ -141,6 +142,7 @@ const UserMap = () => {
                 <SelectItem value="CP2">CP-2</SelectItem>
                 <SelectItem value="SCP1">SCP-1</SelectItem>
                 <SelectItem value="SCP2">SCP-2</SelectItem>
+                <SelectItem value="TRAINEE">Trainee</SelectItem>
               </SelectContent>
             </Select>
           </div>

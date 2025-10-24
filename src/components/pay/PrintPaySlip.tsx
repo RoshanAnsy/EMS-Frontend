@@ -19,7 +19,7 @@ const PrintPaySlip = ({ id, printDetails }: PrintPaySlipProps) => {
   const PayMentDetails = async () => {
     try {
       const result = await GetPaymentDetails(token as string, id);
-
+      console.log("this is data print while generate pdf",result)
       if (!result?.paymentD) {
         alert("No payment details found.");
         return;
@@ -90,7 +90,7 @@ const PrintPaySlip = ({ id, printDetails }: PrintPaySlipProps) => {
           else earnings.push([label, formattedValue]);
         }
       };
-
+      alert("working 4");
       // Only print fields that are enabled in printDetails
       addIfTrue("FixAmount", "Basic", payment.FixAmount);
       addIfTrue("VariableAmount", "Incentive Pay", payment.VariableAmount);
@@ -172,3 +172,10 @@ const PrintPaySlip = ({ id, printDetails }: PrintPaySlipProps) => {
 };
 
 export default PrintPaySlip;
+
+
+
+
+
+
+
