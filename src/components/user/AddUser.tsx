@@ -145,6 +145,8 @@ const AddUser = () => {
                   <SelectItem value="SITESUPERVISOR">Site supervisor</SelectItem>
                   <SelectItem value="TRAINEE">Trainee</SelectItem>
                   <SelectItem value="HR">HR</SelectItem>
+                  <SelectItem value="CP">CP</SelectItem>
+                  <SelectItem value="SCP">SCP</SelectItem>
                   <SelectItem value="CP1">CP-1</SelectItem>
                   <SelectItem value="CP2">CP-2</SelectItem>
                   <SelectItem value="SCP1">SCP-1</SelectItem>
