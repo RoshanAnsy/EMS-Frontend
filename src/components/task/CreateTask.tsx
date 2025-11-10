@@ -95,11 +95,13 @@ const CreateTask = ({Users}:{Users:DropDown[]}) => {
 
       if (response.success === true) {
         toast.success("Task Created Successfully");
-        router.push("/view/task/taskList");
+        location.reload();
+        // router.push("/view/task/taskList");
       }
     } catch (err) {
       toast.error("Failed to create task");
       console.error(err);
+     
     } finally {
       setLoading(false);
     }
@@ -110,12 +112,12 @@ const CreateTask = ({Users}:{Users:DropDown[]}) => {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="font-bold text-xl">Create Task</h1>
-        <Link
+        {/* <Link
           href="/view/task/taskList"
           className="text-sm text-blue-950 hover:underline"
         >
           <Button variant="outline">Task Summary</Button>
-        </Link>
+        </Link> */}
       </div>
 
       {/* Form */}

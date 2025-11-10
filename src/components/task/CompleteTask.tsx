@@ -54,7 +54,8 @@ const CompleteTask = ({TaskIds}:{TaskIds:string}) => {
 
       if (response.success === true) {
         toast.success("Task Updated Successfully");
-        router.push("/view/task/taskList");
+        location.reload();
+        // router.push("/view/task/taskList");
       }
     } catch (err) {
       toast.error("Failed to create task");
@@ -69,12 +70,12 @@ const CompleteTask = ({TaskIds}:{TaskIds:string}) => {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="font-bold text-xl">Complete Task</h1>
-        <Link
+        {/* <Link
           href="/view/task/taskList"
           className="text-sm text-blue-950 hover:underline"
         >
           <Button variant="outline">Task Summary</Button>
-        </Link>
+        </Link> */}
       </div>
 
       {/* Form */}
