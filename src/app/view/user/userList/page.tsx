@@ -20,7 +20,7 @@ type User = {
   role: string
   email: string
   id: string
-
+  EmplyID:string
 }
 
 const Page = async () => {
@@ -42,7 +42,7 @@ const Page = async () => {
           <TableRow>
             <TableHead className="w-[200px] border-2 border-gray-300 text-start">Name</TableHead>
             <TableHead className="w-[150px] border-2 border-gray-300 text-start">Role</TableHead>
-            <TableHead className="border-2 border-gray-300 text-start">Email</TableHead>
+            <TableHead className="border-2 border-gray-300 text-start">EmplyID</TableHead>
             <TableHead className="border-2 border-gray-300 text-start">Action</TableHead>
             
           </TableRow>
@@ -53,7 +53,7 @@ const Page = async () => {
               <TableRow key={index}>
                 <TableCell className="font-medium border-2 border-gray-100 text-start">{user.name}</TableCell>
                 <TableCell className="border-2 border-gray-100 text-start">{user.role}</TableCell>
-                <TableCell className="border-2 border-gray-100 text-start">{user.email}</TableCell>
+                <TableCell className="border-2 border-gray-100 text-start">{user.EmplyID}</TableCell>
                  <TableCell className="space-x-4 border-2 border-gray-100 text-start">
                   <Link href={'/view/user/role'}><Button variant="link" className="p-0"> Access</Button></Link>
                   <Link href={`/view/user/remove/${user.id}`}><Button variant="link" className="p-0"> Remove Access</Button></Link>

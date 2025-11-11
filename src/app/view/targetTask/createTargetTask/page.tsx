@@ -8,6 +8,7 @@ import { cookies } from 'next/headers';
 type DropDown={
   id: string;
   name: string;
+  EmplyID: string;
 }
 const page = async() => {
   const token = await getCookie('login-token', { cookies });

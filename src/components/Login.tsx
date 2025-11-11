@@ -7,8 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Image from 'next/image';
 import URV from '../../public/URV-HRMS4a.png';
-// import Biller from '../../public/Biller.png';
-import BillerLogo from '../../public/Biller-Logo.png';
+// import Link from 'next/link';
+
+
 // import icon from '../../public/icon.png'
 // import vender from '../../public/VendorLogin.png'
 import { useRouter } from 'next/navigation';
@@ -107,7 +108,7 @@ const Login = () => {
         <Button type="submit" disabled={loading} className="w-full bg-blue-900 rounded-full hover:bg-blue-950">
           {loading ? 'Logging in...' : 'Login'}
         </Button>
-        {/* <Link className='w-full mb-4 text-blue-900 font-bold' href={``}>Forgot your password</Link> */}
+        {/* <Link className='w-full mb-4 text-blue-900 font-bold' href="/reset">Forgot your password</Link> */}
       </form>
       </div>
     </Card>

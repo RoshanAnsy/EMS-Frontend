@@ -36,6 +36,7 @@ type LoginFormInputs = {
 type DropDown={
   id: string;
   name: string;
+  EmplyID: string;
 }
 const UserMap = () => {
   const { register, handleSubmit, setValue } = useForm<LoginFormInputs>();
@@ -159,8 +160,8 @@ const UserMap = () => {
               <SelectContent>
                 {UserManageList.length > 0 ? (
                   UserManageList.map((user) => (
-                    <SelectItem key={user.id} value={user.id}>
-                      {user.name}
+                    <SelectItem key={user.id} value={user.id} className="flex">
+                     <span>{user.name}</span>  <span>  {user.EmplyID}</span>
                     </SelectItem>
                   ))
                 ) : (
@@ -181,8 +182,8 @@ const UserMap = () => {
                          </SelectTrigger>
                          <SelectContent>
                            {userList?.map((item:DropDown,index:number) => (
-                             <SelectItem key={index} value={item.id}>
-                               {item.name}
+                             <SelectItem key={index} value={item.id} className="flex">
+                              <span>{item.name}</span>  <span>  {item.EmplyID}</span>
                              </SelectItem>
                            ))}
                            

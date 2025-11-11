@@ -29,6 +29,7 @@ type TaskFormInputs = {
 type DropDown={
   id: string;
   name: string;
+  EmplyID: string;
 }
 
 const CreateTargetTask = ({Users}:{Users:DropDown[]}) => {
@@ -154,8 +155,8 @@ const CreateTargetTask = ({Users}:{Users:DropDown[]}) => {
                 </SelectTrigger>
                 <SelectContent>
                   {Users.map((item:DropDown,index:number) => (
-                    <SelectItem key={index} value={item.id}>
-                      {item.name}
+                    <SelectItem key={index} value={item.id} className="flex">
+                      <span>{item.name}</span><span>  {item.EmplyID}</span> 
                     </SelectItem>
                   ))}
                   

@@ -5,6 +5,7 @@ export interface UserRecord {
     name: string;
     email: string;
     role: string;
+    EmplyID: string;
 }
 export interface UserPagination {
   currentPage: number;

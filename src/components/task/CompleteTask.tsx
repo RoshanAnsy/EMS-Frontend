@@ -32,7 +32,7 @@ type TaskId={
 
 const CompleteTask = ({TaskIds}:{TaskIds:string}) => {
   const { register, handleSubmit,setValue } = useForm<TaskFormInputs>();
-  const router = useRouter();
+  // const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error] = useState("");
   const token = getCookie("login-token");

@@ -21,7 +21,7 @@ export default async function AllUserPage() {
         <TableHeader className="bg-white">
           <TableRow className="border border-gray-300">
             <TableHead className="border border-gray-300 text-center">Name</TableHead>
-            <TableHead className="border border-gray-300 text-center">Email</TableHead>
+            <TableHead className="border border-gray-300 text-center">EmplyID</TableHead>
             <TableHead className="border border-gray-300 text-center">Role</TableHead>
             <TableHead className="border border-gray-300 text-center">Action</TableHead>
           </TableRow>
@@ -32,7 +32,7 @@ export default async function AllUserPage() {
             data.map((user) => (
               <TableRow key={user.id} className="border border-gray-300">
                 <TableCell className="border border-gray-300">{user.name}</TableCell>
-                <TableCell className="border border-gray-300">{user.email}</TableCell>
+                <TableCell className="border border-gray-300">{user.EmplyID}</TableCell>
                 <TableCell className="border border-gray-300">{user.role}</TableCell>
                 <TableCell className="border border-gray-300"><Link href={`/view/AllUser/Attendance/${user.id}`}><Button>Attendance</Button></Link></TableCell>
               </TableRow>

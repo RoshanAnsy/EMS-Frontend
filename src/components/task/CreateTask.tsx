@@ -51,11 +51,12 @@ type TaskFormInputs = {
 type DropDown={
   id: string;
   name: string;
+  EmplyID: string;
 }
 
 const CreateTask = ({Users}:{Users:DropDown[]}) => {
   const { register, handleSubmit,setValue } = useForm<TaskFormInputs>();
-  const router = useRouter();
+  // const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error] = useState("");
   const token = getCookie("login-token");
@@ -168,8 +169,8 @@ const CreateTask = ({Users}:{Users:DropDown[]}) => {
                 </SelectTrigger>
                 <SelectContent>
                   {Users.map((item:DropDown,index:number) => (
-                    <SelectItem key={index} value={item.id}>
-                      {item.name}
+                    <SelectItem key={index} value={item.id} >
+                     {item.EmplyID}  
                     </SelectItem>
                   ))}
                   
