@@ -129,6 +129,8 @@ const UserMap = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="ACP1">A-CP1</SelectItem>
+                <SelectItem value="ACP">A-CP</SelectItem>
                 <SelectItem value="Director">Director</SelectItem>
                 <SelectItem value="Hos">Hos</SelectItem>
                 <SelectItem value="StateHead">State Head</SelectItem>

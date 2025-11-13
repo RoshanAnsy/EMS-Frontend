@@ -68,7 +68,7 @@ export const CreateUser= async(name:string,email:string,password:string,conformP
     }
 );
   
-  console.log(response);
+  // console.log(response);
   return response.data;
 }
 
@@ -113,7 +113,7 @@ export const UpdateUserDetailsApi= async(name:string,MobileNo:string,PanNo:strin
     }
 );
   
-  console.log(response);
+  // console.log(response);
   return response.data;
 }
 
@@ -141,7 +141,7 @@ export const GetAccessSideBar= async(token:string,userId:string)=>{
     }
   );
 
-  console.log("this is server this is code",response)
+  // console.log("this is server this is code",response)
   
   return response.data;
 }
@@ -158,7 +158,25 @@ export const UpdatePassword= async(token:string,EmpID:string,password:string,con
     }
   );
 
-  console.log("this is server this is code",response)
+ 
+  
+  return response.data;
+}
+
+
+export const ResetPassword= async(token:string,password:string,conformPassword:string)=>{
+  // console.log("testing code latest token and userid",token,userId)
+  const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/ResetPassWord`,
+    // {EmpID,password,conformPassword},
+    {password,conformPassword:conformPassword},
+    {    
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+ 
   
   return response.data;
 }

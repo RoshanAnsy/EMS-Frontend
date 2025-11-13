@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import {
   Select,
   SelectContent,
@@ -14,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Eye, EyeOff } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { CreateUser } from "@/api/auth";
 import { toast } from "sonner";
@@ -34,6 +36,8 @@ const AddUser = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
   const handleLogin = async (data: LoginFormInputs) => {
@@ -134,6 +138,8 @@ const AddUser = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="ACP1">A-CP1</SelectItem>
+                  <SelectItem value="ACP">A-CP</SelectItem>
                   <SelectItem value="Director">Director</SelectItem>
                   <SelectItem value="Hos">Hos</SelectItem>
                   <SelectItem value="StateHead">State Head</SelectItem>
@@ -151,6 +157,7 @@ const AddUser = () => {
                   <SelectItem value="CP2">CP-2</SelectItem>
                   <SelectItem value="SCP1">SCP-1</SelectItem>
                   <SelectItem value="SCP2">SCP-2</SelectItem>
+                  
 
                 </SelectContent>
               </Select>
@@ -159,7 +166,7 @@ const AddUser = () => {
             
 
             {/* Password */}
-            <div>
+            {/* <div>
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
@@ -176,7 +183,42 @@ const AddUser = () => {
                 {...register("conformpassword", { required: true })}
                 className="mt-1 w-full"
               />
-            </div>
+            </div> */}
+
+          
+            <div className="mb-4 relative">
+          <Label htmlFor="password">Password</Label>
+          <div className="relative mt-1">
+            <Input
+              type={showPassword ? "text" : "password"}
+              {...register("password", { required: true })}
+              className="w-full pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+
+          <Label htmlFor="conformpassword" className='mt-3'>Confirm Password</Label>
+          <div className="relative mt-1">
+            <Input
+              type={showPassword ? "text" : "password"}
+              {...register("conformpassword", { required: true })}
+              className="w-full pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+          </div>
 
             {/* Error Message */}
             {error && <p className="text-red-500">{error}</p>}

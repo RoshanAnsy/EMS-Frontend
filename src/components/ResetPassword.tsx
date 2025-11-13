@@ -52,7 +52,7 @@ const ResetPassword = () => {
     </div> */}
     <Card className="flex flex-col    rounded-lg shadow-md p-4">
       
-     <p className='font-bold text-xl text-center'>Update Password</p>
+     <p className='font-bold text-xl text-center'>Admin Update Password </p>
       <div className=' text-black text-sm font-normal p-12 justify-center'>
       <form onSubmit={handleSubmit(ResetPassword)}>
         <div className="mb-4">
@@ -79,37 +79,37 @@ const ResetPassword = () => {
         </div> */}
 
         <div className="mb-4 relative">
-  <Label htmlFor="password">Password</Label>
-  <div className="relative mt-1">
-    <Input
-      type={showPassword ? "text" : "password"}
-      {...register("password", { required: true })}
-      className="w-full pr-10"
-    />
-    <button
-      type="button"
-      onClick={() => setShowPassword((prev) => !prev)}
-      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-    >
-      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-    </button>
-  </div>
+          <Label htmlFor="password">Password</Label>
+          <div className="relative mt-1">
+            <Input
+              type={showPassword ? "text" : "password"}
+              {...register("password", { required: true })}
+              className="w-full pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
 
-  <Label htmlFor="ConformPassword" className='mt-3'>Conform Password</Label>
-  <div className="relative mt-1">
-    <Input
-      type={showPassword ? "text" : "password"}
-      {...register("ConformPassword", { required: true })}
-      className="w-full pr-10"
-    />
-    <button
-      type="button"
-      onClick={() => setShowPassword((prev) => !prev)}
-      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-    >
-      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-    </button>
-  </div>
+          <Label htmlFor="ConformPassword" className='mt-3'>Confirm Password</Label>
+          <div className="relative mt-1">
+            <Input
+              type={showPassword ? "text" : "password"}
+              {...register("ConformPassword", { required: true })}
+              className="w-full pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
 </div>
 
         {error && <p className="text-red-500 mb-4">{error}</p>}

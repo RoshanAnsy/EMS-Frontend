@@ -8,11 +8,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '../ui/card';
 import { Eye, EyeOff } from "lucide-react";
-import { UpdatePassword } from '@/api/auth';
+// import { ResetPassWord } from '@/api/auth';
+// import ResetPassword from '../ResetPassword';
+import { ResetPassword } from '@/api/auth';
 import { getCookie } from "cookies-next/client";
+import { toast } from 'sonner';
 
 type ChangePasswordForm = {
-  EmplyID: string;
+  // EmplyID: string;
   password: string;
   confirmPassword: string;
 };
@@ -35,11 +38,11 @@ const ChangePassword = () => {
         setLoading(false);
         return;
       }
-      const response=await UpdatePassword(token as string, data.EmplyID, data.password, data.confirmPassword);
-      alert(response.message);
-      // location.reload();
+      const response=await ResetPassword(token as string, data.password, data.confirmPassword);
+      toast.success(response.message);
+      location.reload();
       // Uncomment below to redirect after successful update:
-      router.push('/view/user/userList');
+      // router.push('/view/user/userList');
     } catch (err: any) {
       setError(`Updating password failed. ${err?.message || err}`);
       // router.push('/login');
@@ -50,16 +53,16 @@ const ChangePassword = () => {
 
   return (
     <Card className="flex flex-col min-w-[30%] mx-auto p-8">
-      <p className='font-bold text-xl text-center border-b'>Change Password</p>
+      <p className='font-bold text-xl text-center border-b'>Update Password</p>
       <div className='text-black text-sm font-normal p-12 justify-center'>
         <form onSubmit={handleSubmit(handleLogin)}>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <Label htmlFor="EmplyID">Enter your ID</Label>
             <Input
               {...register("EmplyID", { required: true })}
               className="mt-1 w-full"
             />
-          </div>
+          </div> */}
 
           <div className="mb-4 relative">
             <Label htmlFor="password">Password</Label>
